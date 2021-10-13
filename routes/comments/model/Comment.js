@@ -2,33 +2,31 @@ const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema(
     {
-        firstName: {
-            type: String,
+        date: {
+            type: Date,
+            default: Date.now
         },
 
-        lastName: {
-            type: String,
+        postId: {
+            type: mongoose.Schema.ObjectId,
+            ref: "post"
         },
 
+        userId: {
+            type: mongoose.Schema.ObjectId,
+            ref: "username"
+        },
+        
         username: {
             type: String,
-            unique: true,
+            ref: "user"
         },
 
-        email: {
-            type: String,
-            unique: true,
-        },
-
-        password: {
-            type: String,
-        },
-
-        posts: [{ type: mongoose.Schema.ObjectId, ref: "post" }],
-
-        comments: [{ type: mongoose.Schema.ObjectId, ref: "comment" }]
+        comment: {
+            type: String
+        }
 
     }
 );
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("comment", commentSchema);
