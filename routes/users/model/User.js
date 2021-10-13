@@ -24,9 +24,9 @@ const userSchema = new mongoose.Schema(
             type: String,
         },
 
-        posts: [{ type: mongoose.Schema.ObjectId, ref: "post" }],
+        postHistory: [{ type: mongoose.Schema.ObjectId, ref: "post" }],
 
-        comments: [{ type: mongoose.Schema.ObjectId, ref: "comment" }]
+        commentHistory: [{ type: mongoose.Schema.ObjectId, ref: "comment" }]
     
     }
 );

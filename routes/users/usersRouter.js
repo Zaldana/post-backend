@@ -3,15 +3,17 @@ var router = express.Router();
 
 const {
     createUser,
+    login,
+    updateUser
 } = require("./controller/userController");
 
 const {
     checkIsEmpty,
     checkIsUndefined,
     validateCreateData,
-    // validateLoginData,
-    // validateUpdateData,
-    // jwtMiddleware
+    validateLoginData,
+    validateUpdateData,
+    jwtMiddleware
 } = require("../utils");
 
 router.post(
@@ -21,5 +23,22 @@ router.post(
     validateCreateData,
     createUser
 );
+
+router.post(
+    "/login",
+    checkIsUndefined,
+    checkIsEmpty,
+    validateLoginData,
+    login
+);
+
+router.put(
+    "/user-update",
+    jwtMiddleware,
+    checkIsUndefined,
+    checkIsEmpty,
+    validateUpdateData,
+    updateUser
+)
 
 module.exports = router;
