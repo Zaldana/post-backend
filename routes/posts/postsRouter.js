@@ -3,10 +3,13 @@ var router = express.Router();
 const { jwtMiddleware } = require("../utils");
 
 const {
+    getAllPosts,
     createPost,
     updatePost,
     deletePost
 } = require("./controller/postController");
+
+router.get('/', jwtMiddleware, getAllPosts);
 
 router.post("/create-post", jwtMiddleware, createPost);
 

@@ -2,6 +2,14 @@ const Post = require('../model/Post');
 const errorHandler = require("../../utils/errorHandler/errorHandler");
 const User = require('../../users/model/User');
 
+
+async function getAllPosts(req, res, next) {
+
+    let foundAllPosts = await Post.find({});
+    res.json({ message: "success", foundAllPosts })
+
+};
+
 async function createPost(req, res) {
 
     try {
@@ -99,7 +107,7 @@ async function deletePost(req, res) {
 };
 
 module.exports = {
-    // getAllPosts,
+    getAllPosts,
     createPost,
     updatePost,
     deletePost,
