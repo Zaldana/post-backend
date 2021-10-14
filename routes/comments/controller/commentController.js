@@ -44,75 +44,75 @@ async function createComment(req, res) {
     }
 };
 
-// async function updatePost(req, res) {
+async function updateComment(req, res) {
 
-//     try {
+    try {
 
-//         let foundPost = await Post.findById(req.params.id);
+        let foundComment = await Comment.findById(req.params.id);
 
-//         if (!foundPost) {
+        if (!foundComment) {
 
-//             res.status(404).json({ message: "failure", error: "Post not found" });
+            res.status(404).json({ message: "failure", error: "Post not found" });
 
-//         } else {
+        } else {
 
-//             let updatedPost = await Post.findByIdAndUpdate(
-//                 req.params.id,
-//                 req.body,
-//                 {
-//                     new: true
-//                 }
-//             );
+            let updatedComment = await Comment.findByIdAndUpdate(
+                req.params.id,
+                req.body,
+                {
+                    new: true
+                }
+            );
 
-//             res.json({ message: "success", payload: updatedPost })
+            res.json({ message: "success", payload: updatedComment })
 
-//         }
+        }
 
-//     } catch (e) {
+    } catch (e) {
 
-//         res.status(500).json(errorHandler(e));
-//     }
-// };
+        res.status(500).json(errorHandler(e));
+    }
+};
 
-// async function deletePost(req, res) {
+async function deleteComment(req, res) {
 
-//     try {
+    try {
 
-//         let deletedPost = await Post.findByIdAndRemove(req.params.id);
+        let deletedComment = await Comment.findByIdAndRemove(req.params.id);
 
-//         if (!deletedPost) {
+        if (!deletedComment) {
 
-//             return res.status(404).json({ message: "failure", error: "post not found" })
+            return res.status(404).json({ message: "failure", error: "comment not found" })
 
-//         } else {
+        } else {
 
-//             const decodedData = res.locals.decodedData;
+            const decodedData = res.locals.decodedData;
 
-//             let foundUser = await User.findOne({ email: decodedData.email });
+            let foundUser = await User.findOne({ email: decodedData.email });
 
-//             let userPostHistoryArray = foundUser.postHistory;
+            let userCommentHistoryArray = foundUser.commentHistory;
 
-//             let filteredPostHistoryArray = userPostHistoryArray.filter(
-//                 (item) => item._id.toString() !== req.params.id);
+            let filteredCommentHistoryArray = userCommentHistoryArray.filter(
+                (item) => item._id.toString() !== req.params.id);
 
-//             foundUser.postHistory = filteredPostHistoryArray;
+            foundUser.commentHistory = filteredCommentHistoryArray;
 
-//             await foundUser.save();
+            await foundUser.save();
 
-//             res.json({ message: "success", deletedPost })
+            res.json({ message: "success", deletedComment })
 
-//         }
+        }
 
-//     } catch (e) {
+    } catch (e) {
 
-//         res.status(500).json(errorHandler(e));
+        res.status(500).json(errorHandler(e));
 
-//     }
-// };
+    }
+};
 
 module.exports = {
     getAllComments,
     createComment,
-    // updatePost,
-    // deletePost,
+    updateComment,
+    deleteComment,
 }
