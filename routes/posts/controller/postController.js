@@ -5,8 +5,8 @@ const User = require('../../users/model/User');
 
 async function getAllPosts(req, res, next) {
 
-    let foundAllPosts = await Post.find({});
-    res.json({ message: "success", foundAllPosts })
+    let foundAllPosts = await Post.find({}).populate("owner", "username")
+    res.json({ message: "success", payload: foundAllPosts })
 
 };
 
@@ -95,7 +95,7 @@ async function deletePost(req, res) {
 
             await foundUser.save();
 
-            res.json({ message: "success", deletedPost })
+            res.json({ message: "success", payload: deletedPost })
 
         }
 
